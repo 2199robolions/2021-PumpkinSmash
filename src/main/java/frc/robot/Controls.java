@@ -18,20 +18,19 @@ public class Controls {
     public Controls() {
         xbox = new XboxController(0);
     }
-       
+    
     public double getRightStick()  {
-
         return xbox.getY(GenericHID.Hand.kRight);
-
     }
+
     public double getLeftStick()  {
-
        return xbox.getY(GenericHID.Hand.kLeft);
-
     }
+
     public double getLeftTrigger(){
         return xbox.getTriggerAxis(GenericHID.Hand.kLeft);
     }
+
     public double getRightTrigger(){
         return xbox.getTriggerAxis(GenericHID.Hand.kRight);
     }

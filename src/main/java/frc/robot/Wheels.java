@@ -1,36 +1,28 @@
 package frc.robot;
 
-
+/**
+ * Add your docs here.
+ */
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
-/**
- * Add your docs here.
- */
-
 
 public class Wheels {
 
-
+    /* Object */
+    private SpeedControllerGroup RightSCG;
+    private SpeedControllerGroup LeftSCG;
     private DifferentialDrive drive;
+
+    //Motor Declarations
+    private Talon frontRight;
+    private Talon frontLeft;
+    private Talon backRight;
+    private Talon backLeft;
     
+    /* Constructer*/
     public Wheels() {
-
-
-        /* Object */
-
-        SpeedControllerGroup RightSCG;
-        SpeedControllerGroup LeftSCG;
-
-        Talon frontRight;
-        Talon frontLeft;
-        Talon backRight;
-        Talon backLeft;
-
-
-        /* Constructer*/
-
         frontRight = new Talon(3);        
         backRight  = new Talon(2);
         frontLeft  = new Talon(0);
@@ -41,6 +33,12 @@ public class Wheels {
 
         drive = new DifferentialDrive(RightSCG, LeftSCG);
     }
+
+    /**
+     * Drives the robot in a tank like manner
+     * @param leftSpeed
+     * @param rightSpeed
+     */
     public void manualControl(double leftSpeed, double rightSpeed)  {
         drive.tankDrive(leftSpeed, rightSpeed);
     }

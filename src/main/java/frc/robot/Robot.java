@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,28 +24,18 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  enum PlateState {
-    RETRACT,
-    DEPLOY
-  }
-  private PlateState plateState;
-
-
   /* Objects */
   private Controls controls;
   private Wheels wheels;
-  private DoubleSolenoid piston;
+  private Piston piston;
   //private Arm arm;
 
   public Robot(){
     //Instance creation
     controls = new Controls();
+    wheels   = new Wheels();
+    piston   = new Piston();
     //arm = new Arm();
-    wheels = new Wheels();
-    piston = new DoubleSolenoid(0,1);
-    piston.set(DoubleSolenoid.Value.kReverse);
-    plateState = PlateState.RETRACT;
-
   }
   
 
@@ -112,33 +101,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    double leftPower;
-    double rightPower;
+    double  leftPower;
+    double  rightPower;
+    boolean removal;
     //double upArmPower; 
     //double downArmPower;
 
-    leftPower = controls.getLeftStick();
+    leftPower  = controls.getLeftStick();
     rightPower = controls.getRightStick();
+    removal    = controls.togglePlate();
     //upArmPower = controller.getRightTrigger();
     //downArmPower = controller.getLeftTrigger();
 
-    wheels.manualControl( leftPower, rightPower);
-   // arm.manualArmControl(downArmPower , upArmPower);
-  
-    if (controls.togglePlate() == true)  {
-      if (plateState == PlateState.RETRACT)  {
-        plateState = PlateState.DEPLOY;
-        piston.set(DoubleSolenoid.Value.kForward);
-        System.out.println("Forward");
-      }
-      else {
-        plateState = PlateState.RETRACT;
-        piston.set(DoubleSolenoid.Value.kReverse);
-        System.out.println("Reverse");
-      }
-    }
+    wheels.manualControl( leftPower, rightPower );
+    piston.deployRetract( removal );
+    //arm.manualArmControl(downArmPower , upArmPower);
   }
-  
 
   /**
    * This function is called periodically during test mode.
