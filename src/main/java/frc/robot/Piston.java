@@ -43,6 +43,10 @@ public class Piston {
         pistonPosition = PlateState.RETRACT;
     }
 
+    /**
+     * Deploys and retracts the cleaning plate
+     * @param togglePlate
+     */
     public void deployRetract(boolean togglePlate) {
         if (togglePlate == true)  {
             if (pistonPosition == PlateState.RETRACT)  {
@@ -58,23 +62,27 @@ public class Piston {
         }
     }
 
+    /**
+     * Starts and stops the siren
+     * @param toggleSiren
+     */
     public void sirenToggle(boolean toggleSiren) {
         if (toggleSiren == true) {
             if (sirenOnOff == SirenState.ENABLED) {
                 sirenOnOff = SirenState.DISABLED;
+                System.out.println("Disabled");
             }
             else if (sirenOnOff == SirenState.DISABLED) {
                 sirenOnOff = SirenState.ENABLED;
+                System.out.println("Enabled");
             }
         }
 
         if (sirenOnOff == SirenState.ENABLED) {
             siren.set(true);
-            System.out.println("Enabled");
         }
         else if (sirenOnOff == SirenState.DISABLED) {
             siren.set(false);
-            System.out.println("Disabled");
         }
     }
 

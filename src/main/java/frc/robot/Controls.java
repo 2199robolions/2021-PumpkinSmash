@@ -40,7 +40,7 @@ public class Controls {
     }
 
     public boolean toggleSiren() {
-        return xbox.getYButtonPressed();
+        return xbox.getBumper(GenericHID.Hand.kLeft);
     }
 
 }
