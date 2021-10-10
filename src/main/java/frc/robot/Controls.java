@@ -19,24 +19,30 @@ public class Controls {
         xbox = new XboxController(0);
     }
     
-    public double getRightStick()  {
+    public double getRightStick() {
         return xbox.getY(GenericHID.Hand.kRight);
     }
 
-    public double getLeftStick()  {
+    public double getLeftStick() {
        return xbox.getY(GenericHID.Hand.kLeft);
     }
 
-    public double getLeftTrigger(){
+    public double getLeftTrigger() {
         return xbox.getTriggerAxis(GenericHID.Hand.kLeft);
     }
 
-    public double getRightTrigger(){
+    public double getRightTrigger() {
         return xbox.getTriggerAxis(GenericHID.Hand.kRight);
     }
 
-    public boolean togglePlate()  {
+    public boolean togglePlate() {
         return xbox.getBumperPressed(GenericHID.Hand.kRight);
     }
 
+    public boolean toggleSiren() {
+        return xbox.getYButtonPressed();
+    }
+
 }
+
+//End of Controls class

@@ -103,18 +103,21 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     double  leftPower;
     double  rightPower;
-    boolean removal;
+    boolean removalToggle;
+    boolean sirenToggle;
     //double upArmPower; 
     //double downArmPower;
 
-    leftPower  = controls.getLeftStick();
-    rightPower = controls.getRightStick();
-    removal    = controls.togglePlate();
-    //upArmPower = controller.getRightTrigger();
+    leftPower     = controls.getLeftStick();
+    rightPower    = controls.getRightStick();
+    removalToggle = controls.togglePlate();
+    sirenToggle   = controls.toggleSiren();
+    //upArmPower   = controller.getRightTrigger();
     //downArmPower = controller.getLeftTrigger();
 
-    wheels.manualControl( leftPower, rightPower );
-    piston.deployRetract( removal );
+    wheels.manualControl( leftPower * 0 , rightPower * 0 );
+    piston.deployRetract( removalToggle );
+    piston.sirenToggle( sirenToggle );
     //arm.manualArmControl(downArmPower , upArmPower);
   }
 
@@ -125,3 +128,5 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
   }
 }
+
+//End of Robot class
